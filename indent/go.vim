@@ -1,11 +1,14 @@
-" indent/go.vim: Vim indent file for Go.
+" Vim indent file
+" Language:	Go
+" Maintainer:	David Barnett (https://github.com/google/vim-ft-go)
+" Last Change:	2014 Aug 16
 "
 " TODO:
 " - function invocations split across lines
 " - general line splits (line ends in an operator)
 
-if exists("b:did_indent")
-    finish
+if exists('b:did_indent')
+  finish
 endif
 let b:did_indent = 1
 
@@ -16,58 +19,60 @@ setlocal autoindent
 setlocal indentexpr=GoIndent(v:lnum)
 setlocal indentkeys+=<:>,0=},0=)
 
-if exists("*GoIndent")
+if exists('*GoIndent')
   finish
 endif
 
 " The shiftwidth() function is relatively new.
 " Don't require it to exist.
 if exists('*shiftwidth')
-  func s:sw()
+  function s:sw() abort
     return shiftwidth()
-  endfunc
+  endfunction
 else
-  func s:sw()
+  function s:sw() abort
     return &shiftwidth
-  endfunc
+  endfunction
 endif
 
 function! GoIndent(lnum)
-  let prevlnum = prevnonblank(a:lnum-1)
-  if prevlnum == 0
+  let l:prevlnum = prevnonblank(a:lnum-1)
+  if l:prevlnum == 0
     " top of file
     return 0
   endif
 
   " grab the previous and current line, stripping comments.
-  let prevl = substitute(getline(prevlnum), '//.*$', '', '')
-  let thisl = substitute(getline(a:lnum), '//.*$', '', '')
-  let previ = indent(prevlnum)
+  let l:prevl = substitute(getline(l:prevlnum), '//.*$', '', '')
+  let l:thisl = substitute(getline(a:lnum), '//.*$', '', '')
+  let l:previ = indent(l:prevlnum)
 
-  let ind = previ
+  let l:ind = l:previ
 
-  if prevl =~ '[({]\s*$'
+  if l:prevl =~ '[({]\s*$'
     " previous line opened a block
-    let ind += s:sw()
+    let l:ind += s:sw()
   endif
-  if prevl =~# '^\s*\(case .*\|default\):$'
+  if l:prevl =~# '^\s*\(case .*\|default\):$'
     " previous line is part of a switch statement
-    let ind += s:sw()
+    let l:ind += s:sw()
   endif
   " TODO: handle if the previous line is a label.
 
-  if thisl =~ '^\s*[)}]'
+  if l:thisl =~ '^\s*[)}]'
     " this line closed a block
-    let ind -= s:sw()
+    let l:ind -= s:sw()
   endif
 
   " Colons are tricky.
   " We want to outdent if it's part of a switch ("case foo:" or "default:").
   " We ignore trying to deal with jump labels because (a) they're rare, and
   " (b) they're hard to disambiguate from a composite literal key.
-  if thisl =~# '^\s*\(case .*\|default\):$'
-    let ind -= s:sw()
+  if l:thisl =~# '^\s*\(case .*\|default\):$'
+    let l:ind -= s:sw()
   endif
 
-  return ind
+  return l:ind
 endfunction
+
+" vim: sw=2 sts=2 et

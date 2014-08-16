@@ -1,5 +1,8 @@
-" go.vim: Vim syntax file for Go.
-"
+" Vim syntax file
+" Language:	Go
+" Maintainer:	David Barnett (https://github.com/google/vim-ft-go)
+" Last Change:	2014 Aug 16
+
 " Options:
 "   There are some options for customizing the highlighting; the recommended
 "   settings are the default values, but you can write:
@@ -8,37 +11,37 @@
 "     let OPTION_NAME = 1
 "   to enable particular options. At present, all options default to on.
 "
-"   - go_highlight_array_whitespace_error
+"   - g:go_highlight_array_whitespace_error
 "     Highlights white space after "[]".
-"   - go_highlight_chan_whitespace_error
-"     Highlights white space around the communications operator that don't follow
-"     the standard style.
-"   - go_highlight_extra_types
+"   - g:go_highlight_chan_whitespace_error
+"     Highlights white space around the communications operator that don't
+"     follow the standard style.
+"   - g:go_highlight_extra_types
 "     Highlights commonly used library types (io.Reader, etc.).
-"   - go_highlight_space_tab_error
+"   - g:go_highlight_space_tab_error
 "     Highlights instances of tabs following spaces.
-"   - go_highlight_trailing_whitespace_error
+"   - g:go_highlight_trailing_whitespace_error
 "     Highlights trailing white space.
 
 " Quit when a (custom) syntax file was already loaded
-if exists("b:current_syntax")
+if exists('b:current_syntax')
   finish
 endif
 
-if !exists("go_highlight_array_whitespace_error")
-  let go_highlight_array_whitespace_error = 1
+if !exists('g:go_highlight_array_whitespace_error')
+  let g:go_highlight_array_whitespace_error = 1
 endif
-if !exists("go_highlight_chan_whitespace_error")
-  let go_highlight_chan_whitespace_error = 1
+if !exists('g:go_highlight_chan_whitespace_error')
+  let g:go_highlight_chan_whitespace_error = 1
 endif
-if !exists("go_highlight_extra_types")
-  let go_highlight_extra_types = 1
+if !exists('g:go_highlight_extra_types')
+  let g:go_highlight_extra_types = 1
 endif
-if !exists("go_highlight_space_tab_error")
-  let go_highlight_space_tab_error = 1
+if !exists('g:go_highlight_space_tab_error')
+  let g:go_highlight_space_tab_error = 1
 endif
-if !exists("go_highlight_trailing_whitespace_error")
-  let go_highlight_trailing_whitespace_error = 1
+if !exists('g:go_highlight_trailing_whitespace_error')
+  let g:go_highlight_trailing_whitespace_error = 1
 endif
 
 syn case match
@@ -200,4 +203,6 @@ hi def link     goSpaceError        Error
 " following as a more expensive/less precise workaround.
 syn sync minlines=500
 
-let b:current_syntax = "go"
+let b:current_syntax = 'go'
+
+" vim: sw=2 sts=2 et

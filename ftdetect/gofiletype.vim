@@ -5,7 +5,7 @@ let s:current_fileformats = ''
 let s:current_fileencodings = ''
 
 " define fileencodings to open as utf-8 encoding even if it's ascii.
-function! s:gofiletype_pre()
+function! s:gofiletype_pre() abort
   let s:current_fileformats = &g:fileformats
   let s:current_fileencodings = &g:fileencodings
   set fileencodings=utf-8 fileformats=unix
@@ -13,7 +13,7 @@ function! s:gofiletype_pre()
 endfunction
 
 " restore fileencodings as others
-function! s:gofiletype_post()
+function! s:gofiletype_post() abort
   let &g:fileformats = s:current_fileformats
   let &g:fileencodings = s:current_fileencodings
 endfunction
@@ -21,3 +21,5 @@ endfunction
 au BufNewFile *.go setlocal filetype=go fileencoding=utf-8 fileformat=unix
 au BufRead *.go call s:gofiletype_pre()
 au BufReadPost *.go call s:gofiletype_post()
+
+" vim: sw=2 sts=2 et
