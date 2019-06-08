@@ -118,9 +118,10 @@ hi def link     goEscapeError       Error
 
 " Strings and their contents
 syn cluster     goStringGroup       contains=goEscapeOctal,goEscapeC,goEscapeX,goEscapeU,goEscapeBigU,goEscapeError
-syn region      goString            start=+"+ skip=+\\\\\|\\"+ end=+"+ contains=@goStringGroup
-syn region      goRawString         start=+`+ end=+`+
+syn region      goString            matchgroup=goStringDelimiter start=+"+ skip=+\\\\\|\\"+ end=+"+ contains=@goStringGroup
+syn region      goRawString         matchgroup=goStringDelimiter start=+`+ end=+`+
 
+hi def link     goStringDelimiter   String
 hi def link     goString            String
 hi def link     goRawString         String
 
