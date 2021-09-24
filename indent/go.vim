@@ -19,6 +19,8 @@ setlocal autoindent
 setlocal indentexpr=GoIndent(v:lnum)
 setlocal indentkeys+=<:>,0=},0=)
 
+let b:undo_indent = "setl ai< inde< indk< lisp<"
+
 if exists('*GoIndent')
   finish
 endif
