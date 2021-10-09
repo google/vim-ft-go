@@ -136,7 +136,7 @@ syn region      goParen             start='(' end=')' transparent
 
 " Integers
 syn match       goDecimalInt        "\<\(0\|[1-9][0-9_]*\)\([Ee]\d\+\)\?\>"
-syn match       goHexadecimalInt    "\<0x[0-9A-F_]\+\>"
+syn match       goHexadecimalInt    "\<0x[0-9A-Fa-f_]\+\>"
 syn match       goOctalInt          "\<0\o\+\>"
 syn match       goOctalError        "\<0\o*[89]\d*\>"
 
