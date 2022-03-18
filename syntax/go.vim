@@ -48,7 +48,7 @@ syn case match
 
 syn keyword     goDirective         package import
 syn keyword     goDeclaration       var const type
-syn keyword     goDeclType          struct interface
+syn keyword     goDeclType          struct interface any
 
 hi def link     goDirective         Statement
 hi def link     goDeclaration       Keyword
